@@ -2,6 +2,8 @@
 const translations = {
     en: {
         menuTitle: "Menu",
+        homeText: "Home",
+        aboutText: "About",
         homeLink: "🏠 Home",
         aboutLink: "ℹ️ About",
         gamesTitle: "Our Games",
@@ -14,6 +16,7 @@ const translations = {
         fallguysDesc: "Join fun multiplayer challenges and compete with players worldwide in hilarious obstacle courses.",
         godofwarDesc: "Battle legendary creatures and gods in an epic Norse mythology adventure with stunning combat systems.",
         fortniteDesc: "Battle royale action with creative building mechanics, intense gameplay, and constant new content.",
+        ffScriptDesc: "Advanced script tool for Free Fire with automatic headshot detection and precision aiming assistance.",
         aboutTitle: "About GameZone",
         aboutText1: "Welcome to GameZone, your ultimate destination for amazing games and entertainment!",
         aboutText2: "We provide a carefully curated collection of the best games from around the world. Whether you're into action, adventure, racing, or competitive gaming, GameZone has something for everyone.",
@@ -25,6 +28,8 @@ const translations = {
     },
     ar: {
         menuTitle: "القائمة",
+        homeText: "الرئيسية",
+        aboutText: "عنا",
         homeLink: "🏠 الرئيسية",
         aboutLink: "ℹ️ عنا",
         gamesTitle: "ألعابنا",
@@ -37,9 +42,10 @@ const translations = {
         fallguysDesc: "شارك في تحديات متعددة اللاعبين والتنافس مع اللاعبين من جميع أنحاء العالم في مسارات عقبات مضحكة.",
         godofwarDesc: "حارب الكائنات الأسطورية والآلهة في مغامرة ملحمية للأساطير الإسكندنافية مع أنظمة قتال مذهلة.",
         fortniteDesc: "حركة معركة ملكية مع ميكانيكا بناء إبداعية وألعاب مكثفة ومحتوى جديد مستمر.",
+        ffScriptDesc: "أداة script متقدمة لـ Free Fire مع كشف رؤية الرأس التلقائي ومساعدة التصويب الدقيق.",
         aboutTitle: "عن GameZone",
         aboutText1: "مرحباً بك في GameZone، وجهتك النهائية للألعاب والترفيه المذهلة!",
-        aboutText2: "نحن نوفر مجموعة منتقاة بعناية من أفضل الألعاب من جم��ع أنحاء العالم. سواء كنت مهتماً بألعاب الحركة أو المغامرة أو السباق أو الألعاب التنافسية، فإن GameZone لديها شيء للجميع.",
+        aboutText2: "نحن نوفر مجموعة منتقاة بعناية من أفضل الألعاب من جميع أنحاء العالم. سواء كنت مهتماً بألعاب الحركة أو المغامرة أو السباق أو الألعاب التنافسية، فإن GameZone لديها شيء للجميع.",
         aboutText3: "تابعنا على وسائل التواصل الاجتماعي لآخر التحديثات والألعاب الجديدة والمحتوى الحصري. انضم إلى مجتمعنا اللاعب اليوم!",
         gamesCount: "ألعاب",
         freeLabel: "مجاني",
@@ -55,7 +61,33 @@ let currentLang = localStorage.getItem('language') || 'en';
 document.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLang);
     updatePageDirection();
+    setupHamburgerMenu();
 });
+
+// Hamburger Menu
+function setupHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar')) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+}
 
 // Language toggle
 document.getElementById('langToggle').addEventListener('click', () => {
